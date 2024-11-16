@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+	--color_window_chat: #212121;
+	--color_message: #5e5858;
+	--font: 'Montserrat', serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		45deg,
+		#8e2de2,
+		#4a00e0,
+		#ff00ff,
+		#c71585
+	); /* Фиолетово-розовый градиент */
+	background-size: 400% 400%;
+	animation: gradientBG 15s ease infinite;
+	color: #ffb6c1; /* Бледно-розовый текст для контраста */
+	min-height: 100vh;
+	font-family: var(--font);
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@media (min-width: 768px) {
+	header {
+		display: block;
+	}
+	nav {
+		background: rgba(33, 33, 33, 0.9); /* Полупрозрачный тёмный фон */
+		color: #ffffff;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 99.9vh;
+		width: 20%;
+		border-radius: 0 10px 30px 0;
+		box-shadow: 0 0 15px rgba(138, 43, 226, 0.6); /* Неоновая фиолетовая тень */
+		border-right: 1px solid rgba(255, 0, 255, 0.5);
+	}
+
+	.settings,
+	.our_dialog {
+		text-align: center;
+		font-weight: 400;
+		font-size: 20px;
+		padding: 1em;
+		background-color: rgba(33, 33, 33, 0.8);
+		color: #ff00ff;
+		text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+		border-radius: 0 10px 30px 0;
+	}
+
+	.ul_settings {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.ul_settings li {
+		padding-top: 1.5em;
+		cursor: pointer;
+		color: #ffb6c1;
+		transition: color 0.3s ease;
+	}
+
+	.ul_settings li:hover {
+		color: #ff00ff; /* Неоновый розовый при наведении */
+	}
+	.win_chat {
+		margin-left: 5em;
+	}
+	.dialog_chat,
+	.question_win {
+		width: 60vw;
+		border-radius: 30px;
+	}
+	.question_win {
+		min-height: 5em;
+		max-height: 10em;
+	}
+	textarea {
+		margin: 2em;
+	}
+	.question_win .custom-file-upload,
+	.send_message {
+		margin: 2em;
+	}
+	textarea::placeholder {
+		font-size: 20px;
+	}
+	.assistantMessage,
+	.userMessage {
+		font-size: 17px;
+	}
+}
+/* Медиазапросы для уменьшения контейнера на разных экранах */
+@media (max-width: 1200px) {
+	.container_nav_and_main {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+@media (max-width: 992px) {
+}
+@media (max-width: 768px) {
+	nav,
+	.our_dialog,
+	.settings,
+	li {
+		display: none;
+	}
+	header {
+		display: block;
+		height: 5vh;
+		width: 100%;
+		background-color: black;
+	}
+
+	.container_nav_and_main {
+		justify-content: center;
+	}
+	.dialog_chat,
+	.question_win {
+		width: 100vw;
+		border-radius: 20px;
+	}
+	.win_chat {
+		margin-left: 0;
+	}
+
+	.question_win {
+		min-height: 3em;
+		max-height: 4em;
+	}
+	textarea {
+		margin: 1em;
+	}
+	.question_win .custom-file-upload,
+	.send_message {
+		margin: 1em;
+	}
+	textarea::placeholder {
+		font-size: 18px;
+	}
+	.assistantMessage,
+	.userMessage {
+		font-size: 10px;
+	}
+}
+
+.container_nav_and_main {
+	display: flex;
+}
+
+.container_win_chat_and_img {
+	display: flex;
+	justify-content: space-between;
+
+	width: 100%;
+}
+.win_chat {
+	display: flex;
+	flex-direction: column;
+
+	height: 100vh;
+}
+
+.dialog_chat {
+	height: 100vh;
+	background-color: var(--color_window_chat);
+	margin-bottom: 2em;
+}
+/* Основной стиль контейнера */
+.dialog_chat {
+	position: relative;
+	background-color: #1a1a1a;
+	border-radius: 15px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/* Анимация для кружащего градиента */
+@keyframes border-rotate {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+}
+.question_win {
+	background-color: var(--color_window_chat);
+
+	margin-bottom: 1em;
+	display: flex;
+	resize: none; /* Отключает ручное изменение размера */
+}
+textarea {
+	width: 100%;
+	background: none;
+	color: white;
+	font-size: 15px;
+	max-height: 5em;
+	border: 0;
+	outline: none;
+	resize: none; /* Отключает ползунок изменения размера */
+	overflow-y: auto;
+}
+
+.question_win .custom-file-upload {
+	background-image: url('./img/q.svg');
+}
+.question_win .custom-file-upload,
+.send_message {
+	background-size: cover;
+	width: 0.5em;
+	padding: 1em;
+	cursor: pointer;
+	max-height: 0.5em;
+}
+
+.send_message {
+	background-image: url('./img/send.svg');
+	height: 10px;
+}
+
+img {
+	width: 100%;
+	height: 5em;
+}
+.items_chat {
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+}
+.container_item_userMessage {
+	align-self: flex-end; /* Выравнивание справа для сообщений пользователя */
+}
+
+.container_item_userMessage,
+.container_item_assistantMessage {
+	display: flex;
+	flex-direction: column;
+}
+
+.userMessage {
+	width: auto;
+	max-width: 70%; /* Ограничиваем ширину сообщения */
+
+	padding: 0.5em 1em;
+	background-color: var(--color_message);
+	border-radius: 20px;
+	color: white;
+
+	word-wrap: break-word; /* Переносим длинные слова */
+}
+
+.p_userMessage {
+	margin-left: 5em;
+	width: min-content;
+}
+.assistantMessage {
+	width: auto;
+	max-width: 60%;
+	padding: 0.5em 1em;
+	background-color: gray; /* Цвет для сообщений ассистента */
+	border-radius: 20px;
+	color: white;
+
+	word-wrap: break-word;
+	align-self: flex-start; /* Выравнивание слева для сообщений ассистента */
+}
