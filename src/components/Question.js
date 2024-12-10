@@ -22,6 +22,14 @@ export class Question extends Component {
 		this.fileInputRef.current.value = '' // Очистить файл
 	}
 
+	handleKeyDown = event => {
+		// Если нажата клавиша Enter
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault() // Предотвращаем перевод строки
+			this.handleSend() // Вызываем метод отправки
+		}
+	}
+
 	render() {
 		return (
 			<>
@@ -41,8 +49,10 @@ export class Question extends Component {
 							e.target.style.height = 'auto'
 							e.target.style.height = `${e.target.scrollHeight}px`
 						}}
+						onKeyDown={this.handleKeyDown} // Добавляем обработчик нажатия клавиш
 					></textarea>
 					<label
+						type='submit'
 						onClick={this.handleSend} // Используем метод handleSend для отправки
 						className='send_message'
 					></label>

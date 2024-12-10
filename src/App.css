@@ -5,18 +5,68 @@
 	--color_message: #5e5858;
 	--font: 'Montserrat', serif;
 }
+/* ---- reset ---- */
+body {
+	margin: 0;
+	font: normal 75% Arial, Helvetica, sans-serif;
+}
+canvas {
+	display: block;
+	vertical-align: bottom;
+} /* ---- particles.js container ---- */
+#particles-js {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #393939;
 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+} /* ---- stats.js ---- */
+.count-particles {
+	background: #000022;
+	position: absolute;
+	top: 48px;
+	left: 0;
+	width: 80px;
+	color: #13e8e9;
+	font-size: 0.8em;
+	text-align: left;
+	text-indent: 4px;
+	line-height: 14px;
+	padding-bottom: 2px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+.js-count-particles {
+	font-size: 1.1em;
+}
+#stats,
+.count-particles {
+	-webkit-user-select: none;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#stats {
+	border-radius: 3px 3px 0 0;
+	overflow: hidden;
+}
+.count-particles {
+	border-radius: 0 0 3px 3px;
+}
 body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
 	height: 100%;
+	background: rgb(174, 175, 170);
 	background: linear-gradient(
-		45deg,
-		#8e2de2,
-		#4a00e0,
-		#ff00ff,
-		#c71585
+		128deg,
+		rgba(174, 175, 170, 1) 27%,
+		rgba(106, 105, 102, 1) 38%,
+		rgba(45, 41, 41, 1) 74%,
+		rgba(141, 151, 153, 1) 100%
 	); /* Фиолетово-розовый градиент */
 	background-size: 400% 400%;
 	animation: gradientBG 15s ease infinite;
@@ -36,13 +86,19 @@ body {
 		background-position: 0% 50%;
 	}
 }
+.particlesBackground {
+	z-index: -1;
+}
+main {
+	z-index: 10;
+}
 
 @media (min-width: 768px) {
 	header {
 		display: block;
 	}
 	nav {
-		background: rgba(33, 33, 33, 0.9); /* Полупрозрачный тёмный фон */
+		background: rgba(33, 33, 33, 0.9);
 		color: #ffffff;
 		position: relative;
 		display: flex;
@@ -51,8 +107,7 @@ body {
 		height: 99.9vh;
 		width: 20%;
 		border-radius: 0 10px 30px 0;
-		box-shadow: 0 0 15px rgba(138, 43, 226, 0.6); /* Неоновая фиолетовая тень */
-		border-right: 1px solid rgba(255, 0, 255, 0.5);
+		box-shadow: 0 0 15px white;
 	}
 
 	.settings,
@@ -62,8 +117,7 @@ body {
 		font-size: 20px;
 		padding: 1em;
 		background-color: rgba(33, 33, 33, 0.8);
-		color: #ff00ff;
-		text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+
 		border-radius: 0 10px 30px 0;
 	}
 
@@ -81,7 +135,7 @@ body {
 	}
 
 	.ul_settings li:hover {
-		color: #ff00ff; /* Неоновый розовый при наведении */
+		color: white; /* Неоновый розовый при наведении */
 	}
 	.win_chat {
 		margin-left: 5em;
@@ -230,27 +284,29 @@ textarea {
 }
 .question_win .custom-file-upload,
 .send_message {
-	background-size: cover;
-	width: 0.5em;
-	padding: 1em;
+	background-size: contain; /* Сохраняем пропорции изображения */
+	background-repeat: no-repeat; /* Избегаем повторения картинки */
+	background-position: center; /* Центрируем изображение */
+	width: 3.5em; /* Задаем ширину кнопки */
+	height: 3.5em; /* Соответствующая высота */
+	padding: 0; /* Убираем лишние отступы */
 	cursor: pointer;
-	max-height: 0.5em;
 }
 
 .send_message {
-	background-image: url('./img/send.svg');
-	height: 10px;
+	background-image: url('./img/q1.svg');
 }
 
 img {
 	width: 100%;
-	height: 5em;
+	height: 8em;
 }
 .items_chat {
 	display: flex;
 	flex-direction: column;
 	padding: 1em;
 }
+
 .container_item_userMessage {
 	align-self: flex-end; /* Выравнивание справа для сообщений пользователя */
 }
@@ -263,18 +319,19 @@ img {
 
 .userMessage {
 	width: auto;
-	max-width: 70%; /* Ограничиваем ширину сообщения */
-
+	width: 70%; /* Ограничиваем ширину сообщения */
+	margin-left: auto;
 	padding: 0.5em 1em;
 	background-color: var(--color_message);
 	border-radius: 20px;
 	color: white;
-
+	align-self: flex-end;
 	word-wrap: break-word; /* Переносим длинные слова */
+	word-break: break-word; /* Перенос длинных строк */
 }
 
 .p_userMessage {
-	margin-left: 5em;
+	margin-left: auto;
 	width: min-content;
 }
 .assistantMessage {

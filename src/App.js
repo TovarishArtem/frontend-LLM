@@ -1,6 +1,6 @@
 import './App.css'
 import React from 'react'
-
+import ParticlesBackground from './ParticlesBackground'
 import DialogСhat from './components/DialogСhat'
 import Header from './components/Header'
 import Nav from './components/Nav'
@@ -25,25 +25,40 @@ class App extends React.Component {
 				},
 			],
 		}
-		this.websocketClient = new WebSocket('ws://localhost:8765')
+		this.websocketClient = new WebSocket('ws://26.184.252.243:8765')
 		this.websocketClient.onmessage = message => {
 			let text = message.data
-			this.createMessageAssistent(text)
+			this.createDelayedAssistentMessage(text)
 		}
 
 		this.createMessageUser = this.createMessageUser.bind(this)
 	}
 
-	createMessageAssistent(message) {
-		const newMessage = {
-			id: Date.now(),
+	// Создаём временное сообщение "Загрузка..." и заменяем его через 5 секунд
+	createDelayedAssistentMessage(finalMessage) {
+		// Добавляем сообщение "Загрузка..."
+		const loadingMessageId = Date.now()
+		const loadingMessage = {
+			id: loadingMessageId,
 			sender: 'assistent',
-			text: message,
+			text: 'Пишет...',
 			image: null,
 		}
+
 		this.setState(prevState => ({
-			messages: [...prevState.messages, newMessage],
+			messages: [...prevState.messages, loadingMessage],
 		}))
+
+		// Через 5 секунд заменяем "Загрузка..." на ответ
+		setTimeout(() => {
+			this.setState(prevState => ({
+				messages: prevState.messages.map(message =>
+					message.id === loadingMessageId
+						? { ...message, text: finalMessage } // Обновляем текст сообщения
+						: message
+				),
+			}))
+		}, 5000)
 	}
 
 	createMessageUser(message, image) {
@@ -101,6 +116,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className='App'>
+				<ParticlesBackground className='particlesBackground' />
 				<Header />
 				<div className='container_nav_and_main'>
 					<Nav />
