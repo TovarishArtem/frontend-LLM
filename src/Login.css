@@ -1,0 +1,44 @@
+.login_or_register {
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	justify-content: center;
+}
+
+.window {
+	font-weight: 400;
+	font-size: 20px;
+	padding: 1em;
+	background-color: rgba(33, 33, 33, 0.8);
+	width: 30%;
+	border-radius: 30px;
+	z-index: 10;
+	color: white;
+	text-align: center;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	text-align: center;
+	align-items: center;
+}
+input {
+	width: 70%;
+	border-radius: 10px;
+	padding: 0.5rem;
+}
+button {
+	width: 20%;
+	border-radius: 10px;
+	padding: 0.3rem;
+	min-width: fit-content;
+}
+@media (max-width: 768px) { 
+	.window{
+		width: 70%;
+	}
+	
+}

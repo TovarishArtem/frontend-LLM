@@ -1,26 +1,37 @@
-import React, { Component } from 'react'
+import React, { useEffect, useRef } from 'react'
 import UserMessage from './UserMessage'
-import AssistentMessage from './AssistentMessage'
+import AssistantMessage from './AssistantMessage'
 
-export class DialogChat extends Component {
-	render() {
-		return (
-			<>
-				<div className='dialog_chat'>
-					<div className='items_chat'>
-						{this.props.userMessages.length > 0 &&
-							this.props.userMessages.map((el, index) =>
-								el.sender === 'user' ? (
-									<UserMessage key={index} message={el} />
-								) : (
-									<AssistentMessage key={index} message={el} />
-								)
-							)}
-					</div>
-				</div>
-			</>
-		)
-	}
+const DialogChat = ({ messages }) => {
+	const bottomRef = useRef(null)
+
+	useEffect(() => {
+		// Скроллим вниз при каждом обновлении messages
+		if (bottomRef.current) {
+			bottomRef.current.scrollIntoView({ behavior: 'smooth' })
+		}
+	}, [messages])
+
+	return (
+		<div className='dialog_chat'>
+			<div className='items_chat'>
+				{Array.isArray(messages) && messages.length > 0 ? (
+					messages.map((el, index) =>
+						el.sender === 'user' ? (
+							<UserMessage key={index} message={el} />
+						) : (
+							<AssistantMessage key={index} message={el} />
+						)
+					)
+				) : (
+					<p className='empty-chat'>Пока нет сообщений</p>
+				)}
+
+				{/* Якорь для автоскролла */}
+				<div ref={bottomRef} />
+			</div>
+		</div>
+	)
 }
 
 export default DialogChat

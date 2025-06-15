@@ -1,0 +1,74 @@
+.custom-tooltip {
+    background-color: #ffffff;
+    border: 2px solid #eeeeee;
+    border-radius: 30px;
+    padding: 16px;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .react-joyride__spotlight{
+    border-radius: 30px !important;
+  }
+  
+  .custom-tooltip__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .react-joyride__overlay{
+    background-color: rgba(0, 0, 0, 0.7);
+  
+  }
+  
+  .custom-tooltip__step {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .custom-tooltip__close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.2s;
+  }
+  
+  .custom-tooltip__close:hover {
+    color: #000;
+  }
+  
+  .custom-tooltip__body {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+  }
+  
+  .custom-tooltip__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
+  .custom-tooltip__back,
+  .custom-tooltip__next {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .custom-tooltip__back {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .custom-tooltip__next {
+    background-color:#333;;
+    color: white;
+  }
+  

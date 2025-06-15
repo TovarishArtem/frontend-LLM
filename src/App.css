@@ -9,6 +9,7 @@
 body {
 	margin: 0;
 	font: normal 75% Arial, Helvetica, sans-serif;
+	overflow: hidden;
 }
 canvas {
 	display: block;
@@ -55,11 +56,13 @@ canvas {
 .count-particles {
 	border-radius: 0 0 3px 3px;
 }
+/* Очищаем отступы и устанавливаем высоту на весь экран */
+html,
 body {
+	height: 100%; /* Задаем высоту на 100% */
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	height: 100%;
+	font-family: var(--font);
 	background: rgb(174, 175, 170);
 	background: linear-gradient(
 		128deg,
@@ -67,12 +70,18 @@ body {
 		rgba(106, 105, 102, 1) 38%,
 		rgba(45, 41, 41, 1) 74%,
 		rgba(141, 151, 153, 1) 100%
-	); /* Фиолетово-розовый градиент */
+	);
 	background-size: 400% 400%;
 	animation: gradientBG 15s ease infinite;
-	color: #ffb6c1; /* Бледно-розовый текст для контраста */
-	min-height: 100vh;
-	font-family: var(--font);
+	color: white;
+}
+
+/* Контейнер для всех элементов */
+.App {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden; /* Отключаем прокрутку внутри контейнера */
 }
 
 @keyframes gradientBG {
@@ -89,25 +98,166 @@ body {
 .particlesBackground {
 	z-index: -1;
 }
+header {
+	height: 5vh;
+	background-color: var(--color_window_chat);
+	display: flex;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding-right: 1.5rem;
+	z-index: 100;
+	font-family: var(--font);
+}
+.center-section {
+	flex: 1;
+	text-align: center;
+}
+
+.model-select {
+	font-size: 16px;
+	padding: 4px 8px;
+	border-radius: 10px;
+	background-color: #2c2c2c;
+	color: white;
+}
+.buttonAside_burger {
+	display: none;
+	cursor: pointer;
+}
+header button {
+	width: 20px;
+	height: 20px;
+}
+
+.buttonAside_open {
+	display: none;
+}
+.exit {
+	color: white;
+	transform: scale(1.5);
+
+	float: right;
+	max-width: fit-content;
+	padding: 0;
+}
+
 main {
 	z-index: 10;
 }
+nav {
+	z-index: 11;
+}
+.dialog_item:hover{
+	color: gray;
+}
+.button_delete{
+	color: gray;
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+}
+.button_delete:hover{
+	color: white;
+	
+}
+.remove-file {
+	min-width: fit-content;
+}
+
+.file-preview {
+	max-width: fit-content;
+	display: flex;
+	gap: 0.3rem;
+}
+.example-appear {
+	opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+	opacity: 1;
+	transition: opacity 0.5s ease-in;
+}
+.ul_dialogs {
+	padding-top: 1rem;
+	padding-left: 1rem;
+	font-size: 15px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.ul_dialogs,
+.ul_settings {
+	list-style: none;
+	margin: 0;
+	list-style: none;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.ul_settings {
+	padding: 0;
+	font-size: 20px;
+}
+.ul_settings li,
+.ul_settings li {
+	padding-top: 1.5em;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.ul_settings li:hover {
+	color: white; /* Неоновый розовый при наведении */
+}
+.tooltip-wrapper {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .tooltip-text {
+	visibility: hidden;
+	background-color: rgba(0, 0, 0, 0.85);
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 6px;
+	position: absolute;
+	top: -4.5rem;
+	left: 4.5rem;
+	white-space: pre-line;
+	font-size: 12px;
+	width: 230px;
+	z-index: 10;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	transition: opacity 0.2s ease-in-out;
+	text-align: justify;
+  }
+  
+  .tooltip-wrapper:hover .tooltip-text {
+	visibility: visible;
+  }
+  .ul_dialogs li.active {
+  color: #e2dede;
+  font-weight: bold;
+}
+  .ul_dialogs li {
+	    color: #9ca1a1;
+  }
+
+ 
 
 @media (min-width: 768px) {
-	header {
-		display: block;
-	}
-	nav {
+	.nav_desktop {
 		background: rgba(33, 33, 33, 0.9);
 		color: #ffffff;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 99.9vh;
+		height: 92vh;
 		width: 20%;
 		border-radius: 0 10px 30px 0;
 		box-shadow: 0 0 15px white;
+		
 	}
 
 	.settings,
@@ -120,23 +270,7 @@ main {
 
 		border-radius: 0 10px 30px 0;
 	}
-
-	.ul_settings {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	.ul_settings li {
-		padding-top: 1.5em;
-		cursor: pointer;
-		color: #ffb6c1;
-		transition: color 0.3s ease;
-	}
-
-	.ul_settings li:hover {
-		color: white; /* Неоновый розовый при наведении */
-	}
+	
 	.win_chat {
 		margin-left: 5em;
 	}
@@ -149,8 +283,45 @@ main {
 		min-height: 5em;
 		max-height: 10em;
 	}
+	.question_container {
+		display: flex;
+		flex-direction: column;
+	}
+	.dropzone {
+		border: 2px dashed rgba(255, 255, 255, 0.323);
+		border-radius: 30px;
+		padding: 0.1rem;
+		text-align: center;
+		margin-bottom: 0px;
+		background-color: var(--color_window_chat);
+		opacity: 0.4;
+	}
+	.dropzone p {
+		color: rgba(255, 255, 255, 0.37);
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.dropzone:hover {
+		border-color: white;
+	}
+	/* Стиль для дропзоны при перетаскивании */
+	.dropzone.dragging {
+		background-color: #c8e6c9;
+		border-color: green;
+	}
+	
+	.image-preview {
+		margin-top: 10px;
+	}
+
+	.image-preview img {
+		max-width: 100%;
+		max-height: 150px; /* Задай размер по необходимости */
+		object-fit: cover;
+	}
 	textarea {
 		margin: 2em;
+		font-size: 10px;
 	}
 	.question_win .custom-file-upload,
 	.send_message {
@@ -161,32 +332,96 @@ main {
 	}
 	.assistantMessage,
 	.userMessage {
-		font-size: 17px;
+		max-width: 30%;
+		font-size: 13px;
 	}
 }
 /* Медиазапросы для уменьшения контейнера на разных экранах */
 @media (max-width: 1200px) {
 	.container_nav_and_main {
 		display: flex;
-		justify-content: space-between;
+		
 	}
 }
 
 @media (max-width: 992px) {
 }
 @media (max-width: 768px) {
-	nav,
+	.buttonAside_burger {
+		display: block;
+		margin: 0.5rem;
+		width: 20px;
+		height: 20px;
+	}
+	.model-select {
+		margin-left: 1rem;
+		font-size: 10px;
+	}
+	/* nav,
 	.our_dialog,
 	.settings,
 	li {
 		display: none;
+	} */
+	.nav_desktop {
+		display: none;
+	}
+	.nav_phone {
+		background: rgba(33, 33, 33, 0.9);
+		color: #ffffff;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100vh;
+		width: 70%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		transform: translateX(-100%);
+		transition: transform 1.5s ease;
+	}
+	.nav_phone.active {
+		transform: translateX(0%);
+	}
+
+	.settings,
+	.our_dialog {
+		text-align: center;
+		font-weight: 400;
+		font-size: 15px;
+		margin-top: 1rem;
+		padding: 1em;
+		background-color: rgba(33, 33, 33, 0.8);
+		border-radius: 0 10px 30px 0;
+	}
+	.ul_dialogs {
+		font-size: 13px;
+	}
+
+	.ul_settings {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		color: white;
+		font-size: 15px;
+	}
+
+	.ul_settings li {
+		padding-top: 1.5em;
+		cursor: pointer;
+		color: white;
+		transition: color 0.3s ease;
+	}
+
+	.ul_settings li:hover {
+		color: white; 
 	}
 	header {
-		display: block;
-		height: 5vh;
-		width: 100%;
-		background-color: black;
+		flex-direction: row;
+		justify-content: space-between;
 	}
+	
 
 	.container_nav_and_main {
 		justify-content: center;
@@ -202,7 +437,7 @@ main {
 
 	.question_win {
 		min-height: 3em;
-		max-height: 4em;
+		max-height: 5em;
 	}
 	textarea {
 		margin: 1em;
@@ -214,14 +449,31 @@ main {
 	textarea::placeholder {
 		font-size: 18px;
 	}
+	.assistantMessage{
+		max-width: 92%;
+		
+	}
+	.userMessage{
+		max-width: 80%;
+	}
 	.assistantMessage,
 	.userMessage {
-		font-size: 10px;
+		font-size: 13px;
+	}
+	.dropzone {
+		display: none;
+	}
+	.dropzone p {
+		display: none;
+	}
+	.tooltip-text{
+		display: none;
 	}
 }
 
 .container_nav_and_main {
 	display: flex;
+	margin: 10px 0 10px 0;
 }
 
 .container_win_chat_and_img {
@@ -234,13 +486,48 @@ main {
 	display: flex;
 	flex-direction: column;
 
-	height: 100vh;
+	height: 92vh;
 }
 
 .dialog_chat {
-	height: 100vh;
+	height: 80vh;
 	background-color: var(--color_window_chat);
-	margin-bottom: 2em;
+	margin-bottom: 4vh;
+	overflow-y: auto;
+}
+
+.error-message {
+	color: red;
+	font-size: 14px;
+	margin-top: 10px;
+  }
+
+
+/* Стилизация полосы прокрутки для Webkit-браузеров (Chrome, Safari) */
+.ul_dialogs::-webkit-scrollbar,
+.dialog_chat::-webkit-scrollbar {
+    width: 8px; /* Ширина полосы прокрутки */
+}
+.ul_dialogs::-webkit-scrollbar-track,
+.dialog_chat::-webkit-scrollbar-track {
+	background-color: var(--color_window_chat);
+    border-radius: 30px; /* Скругление углов трека */
+}
+.ul_dialogs::-webkit-scrollbar-thumb,
+.dialog_chat::-webkit-scrollbar-thumb {
+	background-color: var(--color_window_chat);
+    border-radius: 30px; /* Скругление углов полосы */
+}
+.ul_dialogs:-webkit-scrollbar-thumb:hover,
+.dialog_chat::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Цвет полосы при наведении */
+}
+
+/* Стилизация для Firefox */
+.ul_dialogs,
+.dialog_chat {
+    scrollbar-width: thin; /* Тонкая полоса прокрутки */
+    scrollbar-color: #888 #1a1a1a; /* Цвет полосы и фона для Firefox */
 }
 /* Основной стиль контейнера */
 .dialog_chat {
@@ -263,7 +550,6 @@ main {
 .question_win {
 	background-color: var(--color_window_chat);
 
-	margin-bottom: 1em;
 	display: flex;
 	resize: none; /* Отключает ручное изменение размера */
 }
@@ -299,7 +585,7 @@ textarea {
 
 img {
 	width: 100%;
-	height: 8em;
+	height: auto;
 }
 .items_chat {
 	display: flex;
@@ -307,9 +593,8 @@ img {
 	padding: 1em;
 }
 
-.container_item_userMessage {
-	align-self: flex-end; /* Выравнивание справа для сообщений пользователя */
-}
+/* .container_item_userMessage {
+	align-self: flex-end; } */
 
 .container_item_userMessage,
 .container_item_assistantMessage {
@@ -319,7 +604,7 @@ img {
 
 .userMessage {
 	width: auto;
-	width: 70%; /* Ограничиваем ширину сообщения */
+	/* max-width: 30%; Ограничиваем ширину сообщения */
 	margin-left: auto;
 	padding: 0.5em 1em;
 	background-color: var(--color_message);
@@ -336,7 +621,7 @@ img {
 }
 .assistantMessage {
 	width: auto;
-	max-width: 60%;
+	/* max-width: 60%; */
 	padding: 0.5em 1em;
 	background-color: gray; /* Цвет для сообщений ассистента */
 	border-radius: 20px;
@@ -344,4 +629,37 @@ img {
 
 	word-wrap: break-word;
 	align-self: flex-start; /* Выравнивание слева для сообщений ассистента */
+}
+.model-settings-popup {
+	position: absolute;
+	top: 40%;
+	right: 0;
+	background-color: #2c2c2c;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	margin: 0 1rem;
+}
+button {
+	background-color: #4e4e4e;
+	color: white;
+}
+
+.model-settings-popup label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 14px;
+}
+
+.model-settings-popup input {
+	width: 90%;
+	padding: 4px;
+	margin-top: 4px;
+	margin-bottom: 10px;
 }
